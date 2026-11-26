@@ -63,12 +63,28 @@ curl -s http://localhost:8080/wallet/bet \
 
 Run it twice: the second call returns the same balance, because the bet with `round-1-bet` was already taken.
 
+## Running the tests
+
+The tests start the wallet on their own, so no server needs to be running.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+pytest -v
+```
+
+Covered so far: a bet takes money, a retried bet is not charged twice, a bet without enough money
+is rejected, a request with a wrong signature is rejected.
+
 ## Project structure
 
 ```
 wallet_mock.py         the server (Python standard library only)
 examples/play_round.py one game round as a provider would play it
 docs/api.md            API description, error codes, rules worth testing
+tests/conftest.py      starts the wallet for the tests and signs requests
+tests/test_wallet.py   the tests
 ```
 
 ## Roadmap
@@ -77,7 +93,8 @@ docs/api.md            API description, error codes, rules worth testing
 - [x] HMAC signature with replay protection
 - [x] Idempotency and refund edge cases
 - [x] Timeout / slow / 500 simulation
-- [ ] Automated tests with pytest
+- [x] Automated tests with pytest: bet, retry, insufficient funds, wrong signature
+- [ ] More tests: win, refund edge cases, expired timestamp, timeout
 - [ ] Dockerfile
 - [ ] Postman collection with signing in a pre-request script (separate repo: `api-testing-postman`)
 - [ ] Playwright API tests in TypeScript (separate repo: `playwright-tests`)
