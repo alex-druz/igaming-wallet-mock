@@ -8,6 +8,7 @@ authenticate the player, take the bet, pay the win, refund the bet if something 
 This project is a small version of that wallet, so the tricky parts can be tested on a laptop:
 signed requests, retries, timeouts and refunds.
 
+[![tests](https://github.com/alex-druz/igaming-wallet-mock/actions/workflows/tests.yml/badge.svg)](https://github.com/alex-druz/igaming-wallet-mock/actions/workflows/tests.yml)
 ![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white)
 ![No dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
 
