@@ -75,8 +75,15 @@ pip install -r requirements-dev.txt
 pytest -v
 ```
 
-Covered so far: a bet takes money, a retried bet is not charged twice, a bet without enough money
-is rejected, a request with a wrong signature is rejected.
+Covered so far (10 tests):
+
+- **Bets:** a bet takes money, a retried bet is not charged twice, a bet without enough money is rejected
+- **Wins:** a win pays the amount, a win without a bet in the round is rejected
+- **Refunds:** a refund twice returns the money once, a refund before the bet blocks the late bet
+- **Security:** a wrong signature and an expired timestamp are rejected
+- **Timeout:** a bet that timed out is still taken, and a retry does not charge again
+
+The timeout test waits for the 6-second delay, so the full run takes about 7 seconds.
 
 ## Project structure
 
@@ -95,7 +102,7 @@ tests/test_wallet.py   the tests
 - [x] Idempotency and refund edge cases
 - [x] Timeout / slow / 500 simulation
 - [x] Automated tests with pytest: bet, retry, insufficient funds, wrong signature
-- [ ] More tests: win, refund edge cases, expired timestamp, timeout
+- [x] More tests: win, refund edge cases, expired timestamp, timeout
 - [ ] Dockerfile
 - [ ] Postman collection with signing in a pre-request script (separate repo: `api-testing-postman`)
 - [ ] Playwright API tests in TypeScript (separate repo: `playwright-tests`)
